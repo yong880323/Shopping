@@ -1,8 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Shopping.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddDbContext<ShopDbController>(Options=> Options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
