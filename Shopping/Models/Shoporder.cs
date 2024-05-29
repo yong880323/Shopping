@@ -20,7 +20,7 @@
         /// <summary>
         /// 訂單名稱
         /// </summary>
-        public string OrderName { get; set; } = null!;
+        public string OrderItem { get; set; } = null!;
 
         /// <summary>
         /// 金額
