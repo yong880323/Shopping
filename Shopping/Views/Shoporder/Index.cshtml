@@ -1,0 +1,48 @@
+﻿@model List<Shoporder>
+<h1>購物清單</h1>
+<form method="post" asp-page-handler="Confirm">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Order Id</th>
+                <th>Order Item</th>
+                <th>Price</th>
+                <th>Cost</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.OrderBy(u => u.Id))
+            {
+                <tr>
+                    <td><input type="checkbox" name="selectedOrders" value="@obj.Id" /></td>
+                    <td>@obj.OrderId</td>
+                    <td>@obj.OrderItem</td>
+                    <td>@obj.Price</td>
+                    <td>@obj.Cost</td>
+                    <td>@obj.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button id="confirmButton" type="submit">Confirm</button>
+</form>
+
+<script>
+    document.getElementById("confirmButton").addEventListener("click", function () {
+        this.disabled = true;
+        // ... (禁用按鈕和顯示進度指示器)
+
+        fetch('/Shoporder/Confirm', { // 發送 POST 請求
+            method: 'POST',
+            body: new FormData(document.querySelector('form')) // 表單資料
+        })
+            .then(response => response.json())
+            .finally(() => {
+                this.disabled = false; // 重新啟用按鈕
+                location.reload(); // 重新整理頁面
+            });
+    });
+
+</script>
