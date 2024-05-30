@@ -11,8 +11,8 @@ using Shopping.Data;
 namespace Shopping.Migrations
 {
     [DbContext(typeof(ShopDbController))]
-    [Migration("20240529182948_SeedCategoryTable")]
-    partial class SeedCategoryTable
+    [Migration("20240530075943_AddShoppingTableToDb")]
+    partial class AddShoppingTableToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,45 @@ namespace Shopping.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Shopping.Models.Param", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CONT")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Seq_no")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Tag")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Param");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CONT = "Payment completed",
+                            Seq_no = 1,
+                            Tag = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CONT = "To be shipped",
+                            Seq_no = 2,
+                            Tag = 2
+                        });
+                });
 
             modelBuilder.Entity("Shopping.Models.Shoporder", b =>
                 {
@@ -54,7 +93,7 @@ namespace Shopping.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Shoporders");
+                    b.ToTable("Shoporder");
 
                     b.HasData(
                         new

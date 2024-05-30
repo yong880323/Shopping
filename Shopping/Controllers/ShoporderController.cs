@@ -15,8 +15,18 @@ namespace Shopping.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var Shoporders = await _context.Shoporders.ToListAsync();
-            return View(Shoporders);
+            var shoporderList = await _context.Shoporder.ToListAsync();
+
+            var statusToContMap = await _context.Param
+                .Where(p => _context.Shoporder.Select(so => so.Status).Contains(p.Tag))
+                .ToDictionaryAsync(p => p.Tag, p => p.CONT);
+
+            // 直接將資料傳遞給視圖
+            ViewBag.ShoporderList = shoporderList;
+            ViewBag.StatusToContMap = statusToContMap;
+
+            return View(); // 不需要傳遞模型
+
         }
 
         [HttpPost]
@@ -24,10 +34,10 @@ namespace Shopping.Controllers
         {
             foreach (var orderId in selectedOrders)
             {
-                var ordersToUpdate = await _context.Shoporders
+                var ordersToUpdate = await _context.Shoporder
                     .Where(o => selectedOrders.Contains(o.Id))
                     .ToListAsync();  // 一次獲取所有訂單
-                var order = await _context.Shoporders.FindAsync(orderId);
+                var order = await _context.Shoporder.FindAsync(orderId);
                 foreach (var Shoporder in ordersToUpdate)
                 {
                     Shoporder.Status = 2;
@@ -35,6 +45,16 @@ namespace Shopping.Controllers
             }
             await _context.SaveChangesAsync();
             return Ok();
+        }
+
+        public IActionResult Details(int Id)
+        {
+            var order = _context.Shoporder.FirstOrDefault(o => o.Id == Id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            return View(order);
         }
     }
 }
