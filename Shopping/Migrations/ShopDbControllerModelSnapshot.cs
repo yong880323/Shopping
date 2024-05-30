@@ -9,7 +9,7 @@ using Shopping.Data;
 
 namespace Shopping.Migrations
 {
-    [DbContext(typeof(ShopDbController))]
+    [DbContext(typeof(ShopDbContext))]
     partial class ShopDbControllerModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

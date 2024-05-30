@@ -10,7 +10,7 @@ using Shopping.Data;
 
 namespace Shopping.Migrations
 {
-    [DbContext(typeof(ShopDbController))]
+    [DbContext(typeof(ShopDbContext))]
     [Migration("20240530075943_AddShoppingTableToDb")]
     partial class AddShoppingTableToDb
     {

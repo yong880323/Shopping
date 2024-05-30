@@ -7,9 +7,9 @@ namespace Shopping.Controllers
 {
     public class ShoporderController : Controller
     {
-        private readonly ShopDbController _context;
+        private readonly ShopDbContext _context;
 
-        public ShoporderController(ShopDbController context) 
+        public ShoporderController(ShopDbContext context) 
         {
             _context = context;
         }

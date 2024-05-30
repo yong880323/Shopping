@@ -4,9 +4,9 @@ using Shopping.Models;
 
 namespace Shopping.Data
 {
-    public class ShopDbController : DbContext
+    public class ShopDbContext : DbContext
     {
-        public ShopDbController(DbContextOptions<ShopDbController> options) : base(options) { }
+        public ShopDbContext(DbContextOptions<ShopDbContext> options) : base(options) { }
 
         public DbSet<Shoporder> Shoporder { get; set; }
         public DbSet<Param> Param { get; set; }
