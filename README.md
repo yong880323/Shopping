@@ -119,4 +119,17 @@
 <BR>
 
 ![29](https://github.com/yong880323/Shopping/assets/113868193/002ab562-67ca-4d41-85c8-6679af339242)
+<h3>status 改成用view的方式呈現 先在打開Shoporder.cs的類別裡面加上ShoporderViewModel</h3>
+<BR>
+
+![30](https://github.com/yong880323/Shopping/assets/113868193/83a23e66-bb72-4815-8750-919b3cde5409)
+<h3>在ShoporderController的index 修改程式改成用view的方式呈現</h3>
+<BR>
+
+![31](https://github.com/yong880323/Shopping/assets/113868193/22d18afc-0065-4ec4-84f6-17d2a9bb8830)
+<h3>最後修改前端index的程式</h3>
+<BR>
+
+![32](https://github.com/yong880323/Shopping/assets/113868193/42c665e0-5f01-4f4b-9721-ed1a72c75788)
+
 
