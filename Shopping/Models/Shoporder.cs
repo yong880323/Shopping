@@ -1,5 +1,10 @@
 ﻿namespace Shopping.Models
 {
+    public class ShoporderViewModel
+    {
+        public List<Shoporder> ShoporderList { get; set; }
+        public Dictionary<int, string> StatusToContMap { get; set; }
+    }
     public class Shoporder
     {
         /// <summary>

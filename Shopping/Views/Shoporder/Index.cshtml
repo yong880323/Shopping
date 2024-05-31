@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Shoporder>
+﻿@model ShoporderViewModel
 <h1>Order List</h1>
 <form method="post"  asp-page-handler="Confirm">
     <table class="table table-bordered table-striped">
@@ -13,27 +13,26 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var obj in ViewBag.ShoporderList as List<Shoporder>)
-            {
-                <tr>
-                    <td><input type="checkbox" name="selectedOrders" value="@obj.Id" /></td>
-                    <td>@obj.OrderId</td>
-                    <td><a asp-action="Details" asp-route-id="@obj.Id">@obj.OrderItem</a></td>
-                    <td>@obj.Price</td>
-                    <td>@obj.Cost</td>
-                    <td>
-                        @if (ViewBag.StatusToContMap is Dictionary<int, string> statusToContMap &&
-                       statusToContMap.TryGetValue(obj.Status, out var contValue))
-                        {
-                            @contValue
-                        }
-                        else
-                        {
-                            @obj.Status
-                        }
-                    </td>
-                </tr>
-            }
+                @foreach (var obj in Model.ShoporderList.OrderBy(u => u.Id))
+                {
+                    <tr>
+                        <td><input type="checkbox" name="selectedOrders" value="@obj.Id" /></td>
+                        <td>@obj.OrderId</td>
+                        <td><a asp-action="Details" asp-route-id="@obj.Id">@obj.OrderItem</a></td>
+                        <td>@obj.Price</td>
+                        <td>@obj.Cost</td>
+                        <td>
+                            @if (Model.StatusToContMap.TryGetValue(obj.Status, out var contValue))
+                            {
+                                @contValue
+                            }
+                            else
+                            {
+                                @obj.Status
+                            }
+                        </td>
+                    </tr>
+                }
         </tbody>
     </table>
     <button id="confirmButton" type="submit">Confirm</button>

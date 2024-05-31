@@ -16,17 +16,17 @@ namespace Shopping.Controllers
         public async Task<IActionResult> Index()
         {
             var shoporderList = await _context.Shoporder.ToListAsync();
-
             var statusToContMap = await _context.Param
                 .Where(p => _context.Shoporder.Select(so => so.Status).Contains(p.Tag))
                 .ToDictionaryAsync(p => p.Tag, p => p.CONT);
 
-            // 直接將資料傳遞給視圖
-            ViewBag.ShoporderList = shoporderList;
-            ViewBag.StatusToContMap = statusToContMap;
+            var viewModel = new ShoporderViewModel
+            {
+                ShoporderList = shoporderList,
+                StatusToContMap = statusToContMap
+            };
 
-            return View(); // 不需要傳遞模型
-
+            return View(viewModel); // 傳遞 viewModel 給 View
         }
 
         [HttpPost]
